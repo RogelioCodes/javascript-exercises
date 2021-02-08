@@ -1,12 +1,16 @@
-const ftoc = function() {
+var ftoc = function (val) {
+  val = (val - 32) * 5/9;
+  console.log(val);
+  return  parseFloat(val.toFixed(1))
+   
+};
 
-}
-
-const ctof = function() {
-
-}
+var ctof = function (val) {
+  val = (val *9/5 )+32;
+  return parseFloat(val.toFixed(1))
+};
 
 module.exports = {
   ftoc,
-  ctof
-}
+  ctof,
+};
