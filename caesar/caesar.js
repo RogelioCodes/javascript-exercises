@@ -1,34 +1,32 @@
-const caesar = function (str, shiftFactor) {
-  let result = "";
-  //   65-90 are the ranges for A-Z (uppercase letters)
-  //   97-122 are the ranges for a-z (lowercase letters)
-  //   26 is the number of letters in the alphabet
-  for (let i = 0; i < str.length; i++) {
-    const charCode = str.charCodeAt(i);
+// write a function that takes a string to be encoded and a shift factor and then returns the encoded string:
+//65 - 90 = A - Z, 97 - 122 = a - z
+//  65 = @ , 65 = A, 90 = Z, 97 = a , 122 = z ,
+//   65-90 are the ranges for A-Z (uppercase letters)
+//   97-122 are the ranges for a-z (lowercase letters)
+//   26 is the number of letters in the alphabet
 
-    if (charCode < 65 || charCode > 122 || (charCode > 90 && charCode < 97)) {
-      result += str[i];
-    } else {
-      //Alternatively you can convert the negative shift into a positive one at the start of your function (a -5 caear shift is the same as a 21 caesar shift):
+const caesar = function (str, shiftFactor){
+if(shiftFactor<0){
+    return caesar(str, shiftFactor+26);
+}
 
-      if (shiftFactor < 0) {
-        shiftFactor = 26 + (shiftFactor % 26);
-      }
-      let newCharCode = charCode + Math.ceil(shiftFactor % 26);
-      console.log("newCharCode: " + newCharCode);
-      if (charCode >= 97 && newCharCode > 122) {
-        newCharCode = newCharCode - 122 + 96;
-      }
-      if (charCode <= 90 && newCharCode > 90) {
-        newCharCode = newCharCode - 90 + 64;
-      }
-
-      result += String.fromCharCode(newCharCode);
+    let result = "";
+    for(let i = 0; i < str.length; i++){
+        let c = str[i];
+        
+        if (c.match(/[a-z]/i)){
+            let varCode = str.charCodeAt(i);
+            if(varCode >= 65 && varCode <=90 ){
+                c = String.fromCharCode(((varCode -65 +shiftFactor)%26 )+ 65);
+            }
+            else if(varCode >= 97 && varCode <=122 ){
+                c = String.fromCharCode(((varCode - 97 +shiftFactor)%26 )+ 97);
+            }
+            
+        }
+        result += c;
     }
-  }
 
-  console.log(result);
-  return result;
+return result;
 };
-
 module.exports = caesar;

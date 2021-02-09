@@ -1,7 +1,7 @@
 const caesar = require("./caesar");
 
 describe("caesar", function () {
-  it("works with single letters", function () {
+ it("works with single letters", function () {
     expect(caesar("A", 1)).toEqual("B");
   });
   it("works with words", function () {
